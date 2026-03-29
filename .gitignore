@@ -1,0 +1,131 @@
+####################################
+# GENERAL
+####################################
+*.log
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+####################################
+# BUILD / TARGET
+####################################
+target/
+build/
+out/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+####################################
+# MAVEN
+####################################
+.mvn/wrapper/maven-wrapper.jar
+
+####################################
+# JAVA
+####################################
+*.class
+*.jar
+*.war
+*.ear
+
+####################################
+# IDE - INTELLIJ
+####################################
+.idea/
+*.iws
+*.iml
+*.ipr
+
+####################################
+# IDE - VSCODE
+####################################
+.vscode/
+
+####################################
+# IDE - ECLIPSE / STS
+####################################
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+####################################
+# NETBEANS
+####################################
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+####################################
+# TEST / COVERAGE
+####################################
+/coverage/
+/test-output/
+
+####################################
+# OS FILES
+####################################
+.DS_Store
+.AppleDouble
+.LSOverride
+
+####################################
+# ENV / SECRETS
+####################################
+.env
+.env.*
+*.env
+
+# application local overrides
+application-local.yml
+application-local.properties
+
+# Spring profiles
+application-dev.yml
+application-dev.properties
+
+####################################
+# DATABASE / LOCAL FILES
+####################################
+*.db
+*.sqlite
+*.sqlite3
+
+####################################
+# LOG FILES
+####################################
+logs/
+*.log
+
+####################################
+# API KEYS / PRIVATE FILES
+####################################
+secrets/
+keys/
+*.pem
+*.key
+*.crt
+*.p12
+
+####################################
+# DOCKER
+####################################
+docker-compose.override.yml
+
+####################################
+# FRONTEND
+####################################
+node_modules/
+dist/
+build/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
