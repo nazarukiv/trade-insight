@@ -8,13 +8,13 @@ public class TradeResult {
 
     private final String symbol;
     private final BigDecimal riskAmount;
-    private final BigDecimal stopLossPips;
+    private final BigDecimal stopLossTicks;
     private final BigDecimal lotSize;
 
-    public TradeResult(String symbol, BigDecimal riskAmount, BigDecimal stopLossPips, BigDecimal lotSize) {
+    public TradeResult(String symbol, BigDecimal riskAmount, BigDecimal stopLossTicks, BigDecimal lotSize) {
         this.symbol = symbol;
         this.riskAmount = riskAmount;
-        this.stopLossPips = stopLossPips;
+        this.stopLossTicks = stopLossTicks;
         this.lotSize = lotSize;
     }
 
@@ -26,8 +26,8 @@ public class TradeResult {
         return riskAmount;
     }
 
-    public BigDecimal getStopLossPips() {
-        return stopLossPips;
+    public BigDecimal getStopLossTicks() {
+        return stopLossTicks;
     }
 
     public BigDecimal getLotSize() {

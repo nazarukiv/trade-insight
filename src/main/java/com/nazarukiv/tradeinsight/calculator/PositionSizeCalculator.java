@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class PositionSizeCalculator {
+    BigDecimal eurUsdRate = new BigDecimal("1.08"); // TODO: replace with real-time EURUSD rate (API later)
 
     public TradeResult calculate(TradeRequest request) {
         validateRequest(request);
@@ -12,39 +13,46 @@ public class PositionSizeCalculator {
 
         BigDecimal riskAmount = request.getBalance()
                 .multiply(request.getRiskPercent())
-                .divide(new BigDecimal("100"), 10, RoundingMode.HALF_UP); //risk calculation in money
+                .divide(new BigDecimal("100"), 10, RoundingMode.HALF_UP);
 
         BigDecimal priceDistance = request.getEntryPrice()
                 .subtract(request.getStopLossPrice())
-                .abs();                                         //distance from stop loss
+                .abs();
 
-        BigDecimal stopLossPips = priceDistance
-                .divide(symbolInfo.getPipSize(), 10, RoundingMode.HALF_UP);  //to pips
+        BigDecimal stopLossTicks = priceDistance
+                .divide(symbolInfo.getTickSize(), 10, RoundingMode.HALF_UP);
 
-        BigDecimal pipValue;
+        BigDecimal tickValuePerLot;
 
         if (request.getSymbol().equalsIgnoreCase("USDCAD")) {
-            pipValue = new BigDecimal("10")
+
+            tickValuePerLot = new BigDecimal("10")
                     .divide(request.getEntryPrice(), 10, RoundingMode.HALF_UP);
+
+        } else if (request.getSymbol().equalsIgnoreCase("GER40")) {
+
+            // GER40 → EUR → USD
+            tickValuePerLot = symbolInfo.getTickValuePerLot()
+                    .multiply(eurUsdRate);
+
         } else {
-            pipValue = symbolInfo.getPipValuePerLot(); //pip value is diffrent(depends on price)
+
+            tickValuePerLot = symbolInfo.getTickValuePerLot();
         }
 
-        BigDecimal moneyLostPerLot = stopLossPips.multiply(pipValue);  //how much money lost per 1 lot
+        BigDecimal moneyLostPerLot = stopLossTicks.multiply(tickValuePerLot);
 
         BigDecimal lotSize = riskAmount
-                .divide(moneyLostPerLot, 2, RoundingMode.HALF_UP); //correct lot size for given request
+                .divide(moneyLostPerLot, 2, RoundingMode.HALF_UP);
 
         return new TradeResult(
                 symbolInfo.getSymbol(),
                 riskAmount.setScale(2, RoundingMode.HALF_UP),
-                stopLossPips.setScale(1, RoundingMode.HALF_UP),
+                stopLossTicks.setScale(1, RoundingMode.HALF_UP),
                 lotSize.setScale(2, RoundingMode.HALF_UP)
         );
     }
 
-
-    //data validation for request
     private void validateRequest(TradeRequest request) {
         if (request == null) {
             throw new IllegalArgumentException("Request cannot be null");

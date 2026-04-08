@@ -30,7 +30,7 @@ public class TradeInsightApplication {
         System.out.print("Enter stop loss price: ");
         BigDecimal stopLoss = new BigDecimal(scanner.nextLine());
 
-        System.out.print("Enter symbol (EURUSD / GBPUSD / USDCAD): ");
+        System.out.print("Enter symbol \n(EURUSD / GBPUSD / USDCAD /\n GER40 / NDX100 /\n XAUUSD(gold)/ XAGUSD(silver)): ");
         String symbol = scanner.nextLine();
 
         TradeRequest request = new TradeRequest(
@@ -46,11 +46,16 @@ public class TradeInsightApplication {
         System.out.println("\n=== RESULT ===");
         System.out.println("Symbol: " + result.getSymbol());
         System.out.println("Risk Amount: $" + result.getRiskAmount());
-        System.out.println("Stop Loss (pips): " + result.getStopLossPips());
+        System.out.println("Stop Loss (pips): " + result.getStopLossTicks());
         System.out.println("Lot Size: " + result.getLotSize());
     }
 
     //tested with real 'EURUSD' and 'GBPUSD' trades.Results match broker calculations.
     //USDCAD initially showed error.Fixed by introducing dynamic pip value calculation.
+
+
+    // tested with real trades: XAUUSD, GER40, NDX100.
+    // results match broker calculations within acceptable rounding range.
+    // XAGUSD still needs real trade validation.
 
 }
