@@ -3,7 +3,10 @@ package com.nazarukiv.tradeinsight;
 import com.nazarukiv.tradeinsight.calculator.PositionSizeCalculator;
 import com.nazarukiv.tradeinsight.calculator.TradeRequest;
 import com.nazarukiv.tradeinsight.calculator.TradeResult;
+import com.nazarukiv.tradeinsight.news.ForexFactorySeleniumService;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.nazarukiv.tradeinsight.news.NewsItem;
+
 
 import java.math.BigDecimal;
 
@@ -11,6 +14,15 @@ import java.math.BigDecimal;
 public class TradeInsightApplication {
 
     public static void main(String[] args) {
+
+        ForexFactorySeleniumService service = new ForexFactorySeleniumService();
+        var news = service.getHighImpactNews();
+
+        System.out.println("=== HIGH IMPACT NEWS ===");
+
+        for (NewsItem item : news) {
+            System.out.println(item.getTime() + " | " + item.getCurrency() + " | " + item.getEvent());
+        }
 
         PositionSizeCalculator calculator = new PositionSizeCalculator();
 
