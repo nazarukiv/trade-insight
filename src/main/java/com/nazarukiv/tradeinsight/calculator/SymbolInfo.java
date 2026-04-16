@@ -36,7 +36,7 @@ public class SymbolInfo {
                 return new SymbolInfo("GBPUSD", new BigDecimal("0.0001"), new BigDecimal("10"));
 
             case "USDCAD":
-                return new SymbolInfo("USDCAD", new BigDecimal("0.0001"), null);
+                return new SymbolInfo("USDCAD", new BigDecimal("0.0001"), BigDecimal.ZERO);
 
             case "XAUUSD":
                 return new SymbolInfo("XAUUSD", new BigDecimal("0.01"), new BigDecimal("1"));

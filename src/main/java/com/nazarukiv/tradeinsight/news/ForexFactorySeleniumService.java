@@ -4,27 +4,29 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import java.time.Duration;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ForexFactorySeleniumService {
 
     public List<NewsItem> getHighImpactNews() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--log-level=3");
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.forexfactory.com/calendar?day=tomorrow");
-
+        WebDriver driver = new ChromeDriver(options);
         List<NewsItem> result = new ArrayList<>();
 
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            driver.get("https://www.forexfactory.com/calendar?day=tomorrow");
 
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.presenceOfElementLocated(
-                    By.cssSelector("tr.calendar__row")
+                    By.cssSelector("td.calendar__cell.calendar__event")
             ));
 
             List<WebElement> rows = driver.findElements(By.cssSelector("tr.calendar__row"));
@@ -39,7 +41,9 @@ public class ForexFactorySeleniumService {
                     }
 
                     String time = row.findElement(By.cssSelector("td.calendar__time")).getText();
-                    if (time.isEmpty()) time = "All Day";
+                    if (time.isBlank()) {
+                        time = "All Day";
+                    }
 
                     String currency = row.findElement(By.cssSelector("td.calendar__currency")).getText();
 
@@ -47,17 +51,18 @@ public class ForexFactorySeleniumService {
                             By.cssSelector("td.calendar__cell.calendar__event")
                     ).getText();
 
-                    result.add(new NewsItem("today", time, currency, "HIGH", event));
+                    result.add(new NewsItem("tomorrow", time, currency, "HIGH", event));
 
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
 
         } catch (Exception e) {
             System.out.println("Error parsing news: " + e.getMessage());
+        } finally {
+            driver.quit();
         }
 
-        driver.quit();
         return result;
     }
 }

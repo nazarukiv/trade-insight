@@ -4,31 +4,55 @@ import com.nazarukiv.tradeinsight.calculator.PositionSizeCalculator;
 import com.nazarukiv.tradeinsight.calculator.TradeRequest;
 import com.nazarukiv.tradeinsight.calculator.TradeResult;
 import com.nazarukiv.tradeinsight.news.ForexFactorySeleniumService;
+import com.nazarukiv.tradeinsight.session.SessionService;
+import com.nazarukiv.tradeinsight.session.SessionTime;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.nazarukiv.tradeinsight.news.NewsItem;
 
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Scanner;
 
 @SpringBootApplication
 public class TradeInsightApplication {
 
     public static void main(String[] args) {
 
-        ForexFactorySeleniumService service = new ForexFactorySeleniumService();
-        var news = service.getHighImpactNews();
+        ForexFactorySeleniumService newsService = new ForexFactorySeleniumService();
+        List<NewsItem> news = newsService.getHighImpactNews();
 
         System.out.println("=== HIGH IMPACT NEWS ===");
+        if (news.isEmpty()) {
+            System.out.println("No high impact news found.");
+        } else {
+            for (NewsItem item : news) {
+                System.out.println(item.getTime() + " | " + item.getCurrency() + " | " + item.getEvent());
+            }
+        }
 
-        for (NewsItem item : news) {
-            System.out.println(item.getTime() + " | " + item.getCurrency() + " | " + item.getEvent());
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("\nEnter timezone (London / Kyiv / New York): ");
+        String input = scanner.nextLine();
+
+        SessionService sessionService = new SessionService();
+        String zoneId = sessionService.mapToZoneId(input);
+
+        List<SessionTime> sessions = sessionService.getSessions(zoneId);
+
+        System.out.println("\n=== SESSIONS ===");
+        for (SessionTime session : sessions) {
+            System.out.println(
+                    session.getName() + ": " +
+                            session.getStart().toLocalTime() + " - " +
+                            session.getEnd().toLocalTime()
+            );
         }
 
         PositionSizeCalculator calculator = new PositionSizeCalculator();
 
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
-
-        System.out.println("=== Position Size Calculator ===");
+        System.out.println("\n=== POSITION SIZE CALCULATOR ===");
 
         System.out.print("Enter balance: ");
         BigDecimal balance = new BigDecimal(scanner.nextLine());
@@ -42,8 +66,8 @@ public class TradeInsightApplication {
         System.out.print("Enter stop loss price: ");
         BigDecimal stopLoss = new BigDecimal(scanner.nextLine());
 
-        System.out.print("Enter symbol \n(EURUSD / GBPUSD / USDCAD /\n GER40 / NDX100 /\n XAUUSD(gold)/ XAGUSD(silver)): ");
-        String symbol = scanner.nextLine();
+        System.out.print("Enter symbol (EURUSD / GBPUSD / USDCAD / GER40 / NDX100 / XAUUSD / XAGUSD): ");
+        String symbol = scanner.nextLine().trim().toUpperCase();
 
         TradeRequest request = new TradeRequest(
                 balance,
@@ -58,7 +82,7 @@ public class TradeInsightApplication {
         System.out.println("\n=== RESULT ===");
         System.out.println("Symbol: " + result.getSymbol());
         System.out.println("Risk Amount: $" + result.getRiskAmount());
-        System.out.println("Stop Loss (pips): " + result.getStopLossTicks());
+        System.out.println("Stop Loss (ticks): " + result.getStopLossTicks());
         System.out.println("Lot Size: " + result.getLotSize());
     }
 
