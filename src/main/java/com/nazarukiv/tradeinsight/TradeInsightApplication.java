@@ -19,6 +19,23 @@ public class TradeInsightApplication {
 
     public static void main(String[] args) {
 
+        //org.springframework.boot.SpringApplication.run(TradeInsightApplication.class, args);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         ForexFactorySeleniumService newsService = new ForexFactorySeleniumService();
         List<NewsItem> news = newsService.getHighImpactNews();
 
