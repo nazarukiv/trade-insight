@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trade Insight</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<h1>Trade Insight</h1>
+
+<div class="container">
+
+    <!-- CALCULATOR -->
+    <div class="card">
+        <h2>Position Size</h2>
+
+        <div id="errorBox"></div>
+
+        <input id="balance" placeholder="Balance">
+        <input id="risk" placeholder="Risk %">
+        <input id="entry" placeholder="Entry Price">
+        <input id="sl" placeholder="Stop Loss">
+
+        <select id="symbol">
+            <option>EURUSD</option>
+            <option>GBPUSD</option>
+            <option>USDCAD</option>
+            <option>GER40</option>
+            <option>NDX100</option>
+            <option>XAUUSD</option>
+            <option>XAGUSD</option>
+        </select>
+
+        <button onclick="calculate()">Calculate</button>
+
+        <div id="result"></div>
+    </div>
+
+    <!-- SESSIONS -->
+    <div class="card">
+        <h2>Sessions</h2>
+
+        <select id="timezone">
+            <option>London</option>
+            <option>Kyiv</option>
+            <option>New York</option>
+        </select>
+
+        <button onclick="loadSessions()">Load Sessions</button>
+
+        <div id="sessions"></div>
+    </div>
+
+    <!-- NEWS -->
+    <div class="card full">
+        <h2>High Impact News</h2>
+
+        <button onclick="loadNews()">Load News</button>
+
+        <div id="news"></div>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@ public class ForexFactorySeleniumService {
         List<NewsItem> result = new ArrayList<>();
 
         try {
-            driver.get("https://www.forexfactory.com/calendar?day=tomorrow");
+            driver.get("https://www.forexfactory.com/calendar?day=today");
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.presenceOfElementLocated(

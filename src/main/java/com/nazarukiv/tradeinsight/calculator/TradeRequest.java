@@ -1,20 +1,34 @@
 package com.nazarukiv.tradeinsight.calculator;
 
+import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 
-
-//input data for the trade
 public class TradeRequest {
 
-    //big decimal is immutable, that's why it's used for these variables.
-    private final BigDecimal balance;
-    private final BigDecimal riskPercent;
-    private final BigDecimal entryPrice;
-    private final BigDecimal stopLossPrice;
-    private final String symbol;
+    @NotNull
+    @Positive
+    private BigDecimal balance;
 
+    @NotNull
+    @Positive
+    private BigDecimal riskPercent;
 
-    //constructor for the trade
+    @NotNull
+    @Positive
+    private BigDecimal entryPrice;
+
+    @NotNull
+    @Positive
+    private BigDecimal stopLossPrice;
+
+    @NotNull
+    @NotBlank
+    private String symbol;
+
+    // for Spring
+    public TradeRequest() {}
+
+    // for CLI
     public TradeRequest(BigDecimal balance,
                         BigDecimal riskPercent,
                         BigDecimal entryPrice,
@@ -26,27 +40,12 @@ public class TradeRequest {
         this.entryPrice = entryPrice;
         this.stopLossPrice = stopLossPrice;
         this.symbol = symbol;
+
     }
 
-
-    //getters
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public BigDecimal getRiskPercent() {
-        return riskPercent;
-    }
-
-    public BigDecimal getEntryPrice() {
-        return entryPrice;
-    }
-
-    public BigDecimal getStopLossPrice() {
-        return stopLossPrice;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
+    public BigDecimal getBalance() { return balance; }
+    public BigDecimal getRiskPercent() { return riskPercent; }
+    public BigDecimal getEntryPrice() { return entryPrice; }
+    public BigDecimal getStopLossPrice() { return stopLossPrice; }
+    public String getSymbol() { return symbol; }
 }
