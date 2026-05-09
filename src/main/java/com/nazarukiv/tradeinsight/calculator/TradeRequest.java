@@ -1,28 +1,17 @@
 package com.nazarukiv.tradeinsight.calculator;
 
-import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class TradeRequest {
 
-    @NotNull
-    @Positive
     private BigDecimal balance;
 
-    @NotNull
-    @Positive
     private BigDecimal riskPercent;
 
-    @NotNull
-    @Positive
     private BigDecimal entryPrice;
 
-    @NotNull
-    @Positive
     private BigDecimal stopLossPrice;
 
-    @NotNull
-    @NotBlank
     private String symbol;
 
     // for Spring

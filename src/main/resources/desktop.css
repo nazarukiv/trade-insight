@@ -1,0 +1,228 @@
+.root {
+    -fx-font-family: "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
+}
+
+.app-root {
+    -fx-background: #070b12;
+    -fx-background-color: #070b12;
+}
+
+.app-root > .viewport {
+    -fx-background-color: transparent;
+}
+
+.app-shell {
+    -fx-background-color: #070b12;
+}
+
+.app-page {
+    -fx-spacing: 12px;
+}
+
+.header-block {
+    -fx-padding: 0 0 2px 0;
+}
+
+.content-grid {
+    -fx-alignment: top-center;
+}
+
+.title {
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
+}
+
+.subtitle {
+    -fx-text-fill: #8b9bb2;
+    -fx-font-size: 12px;
+}
+
+.card {
+    -fx-background-color: #0d1420;
+    -fx-background-radius: 8px;
+    -fx-border-color: #1f2a3a;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.28), 18, 0.16, 0, 6);
+    -fx-spacing: 10px;
+}
+
+.news-card {
+    -fx-spacing: 8px;
+}
+
+.card-title {
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+}
+
+.label {
+    -fx-text-fill: #e2e8f0;
+}
+
+.text-field,
+.combo-box {
+    -fx-background-color: #111b2a;
+    -fx-background-radius: 7px;
+    -fx-border-color: #263448;
+    -fx-border-radius: 7px;
+    -fx-text-fill: #f8fafc;
+    -fx-prompt-text-fill: #65758c;
+    -fx-font-size: 13px;
+    -fx-padding: 9px 11px;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: #f8fafc;
+    -fx-background-color: transparent;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #111b2a;
+    -fx-border-color: #263448;
+}
+
+.combo-box-popup .list-cell:filled:selected,
+.combo-box-popup .list-cell:filled:hover {
+    -fx-background-color: #1a283d;
+}
+
+.button {
+    -fx-background-radius: 7px;
+    -fx-padding: 9px 13px;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-cursor: hand;
+}
+
+.primary-button {
+    -fx-background-color: linear-gradient(to right, #22c55e, #4ade80);
+    -fx-text-fill: #04130a;
+}
+
+.secondary-button {
+    -fx-background-color: #141f30;
+    -fx-text-fill: #f8fafc;
+    -fx-border-color: #2a374a;
+    -fx-border-radius: 7px;
+}
+
+.result-label {
+    -fx-background-color: #101927;
+    -fx-background-radius: 7px;
+    -fx-border-color: #223148;
+    -fx-border-radius: 7px;
+    -fx-padding: 11px 12px;
+    -fx-font-size: 13px;
+    -fx-line-spacing: 2px;
+}
+
+.error-label {
+    -fx-background-color: rgba(220, 38, 38, 0.18);
+    -fx-background-radius: 7px;
+    -fx-text-fill: #fecaca;
+    -fx-padding: 9px 11px;
+    -fx-font-size: 12px;
+}
+
+.content-list {
+    -fx-padding: 1px 0 0 0;
+    -fx-spacing: 7px;
+}
+
+.list-item {
+    -fx-background-color: #101927;
+    -fx-background-radius: 7px;
+    -fx-padding: 9px 10px;
+    -fx-border-color: #1d2939;
+    -fx-border-radius: 7px;
+}
+
+.muted-label {
+    -fx-text-fill: #8b9bb2;
+    -fx-font-size: 12px;
+}
+
+.session-name {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+}
+
+.session-time {
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 12px;
+}
+
+.news-item {
+    -fx-padding: 8px 10px;
+}
+
+.currency-pill {
+    -fx-background-color: rgba(34, 197, 94, 0.14);
+    -fx-background-radius: 4px;
+    -fx-border-color: rgba(34, 197, 94, 0.32);
+    -fx-border-radius: 4px;
+    -fx-text-fill: #7ddf9b;
+    -fx-font-size: 11px;
+    -fx-font-weight: 800;
+    -fx-padding: 3px 7px;
+    -fx-alignment: center;
+    -fx-min-width: 48px;
+}
+
+.news-title {
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+}
+
+.news-meta {
+    -fx-text-fill: #7f8ea3;
+    -fx-font-size: 11px;
+}
+
+.impact-badge {
+    -fx-background-color: rgba(239, 68, 68, 0.13);
+    -fx-background-radius: 4px;
+    -fx-border-color: rgba(239, 68, 68, 0.28);
+    -fx-border-radius: 4px;
+    -fx-text-fill: #fca5a5;
+    -fx-font-size: 10px;
+    -fx-font-weight: 800;
+    -fx-padding: 3px 6px;
+    -fx-alignment: center;
+    -fx-min-width: 42px;
+}
+
+.news-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+}
+
+.news-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.news-scroll .corner {
+    -fx-background-color: transparent;
+}
+
+.news-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+}
+
+.news-scroll .thumb,
+.app-root .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(125, 149, 180, 0.42);
+    -fx-background-radius: 999px;
+}
+
+.app-root .scroll-bar:vertical,
+.app-root .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
